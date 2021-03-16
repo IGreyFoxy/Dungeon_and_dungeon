@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/LowPolyGGtest1PolySphere.OBJ-fb7976486d826490a20132f1218e2f69.mesh"
+
+[deps]
+
+files=[ "res://.import/LowPolyGGtest1PolySphere.OBJ-fb7976486d826490a20132f1218e2f69.mesh" ]
+
+source_file="res://assets/assets/Minion/GG/LowPolyGGtest1PolySphere.OBJ"
+dest_files=[ "res://.import/LowPolyGGtest1PolySphere.OBJ-fb7976486d826490a20132f1218e2f69.mesh", "res://.import/LowPolyGGtest1PolySphere.OBJ-fb7976486d826490a20132f1218e2f69.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true
