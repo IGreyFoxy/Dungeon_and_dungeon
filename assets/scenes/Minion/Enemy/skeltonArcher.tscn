@@ -1,0 +1,83 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://scenes/Minion/Healthbar.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/Minion/enemy/skeltonArcher.gd" type="Script" id=2]
+[ext_resource path="res://scenes/Minion/Enemy/Equipment/rangeWeapon_enemy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Minion/Enemy/Equipment/arrow.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/Minion/timers.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/Minion/Enemy/Skeleslhep2kSemifullPolySphere.OBJ" type="ArrayMesh" id=6]
+
+[sub_resource type="BoxShape" id=1]
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="BoxShape" id=3]
+
+[sub_resource type="BoxShape" id=4]
+
+[node name="Skeleton_Archer" type="KinematicBody" groups=[
+"Enemy",
+"range",
+"skeleton",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.30776, 0 )
+script = ExtResource( 2 )
+weapon = ExtResource( 3 )
+firebool = ExtResource( 4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 2, 0, 0, 0, 0.5, 0, 1, 0 )
+shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( -0.2, 0, -7.78829e-08, 0, 0.2, 0, 7.78829e-08, 0, -0.2, 0, 3, 0 )
+mesh = ExtResource( 6 )
+material/0 = SubResource( 2 )
+
+[node name="hitbox" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+input_ray_pickable = false
+angular_damp = 1.0
+
+[node name="CollisionShape" type="CollisionShape" parent="hitbox"]
+shape = SubResource( 3 )
+
+[node name="agro_zone" type="Area" parent="."]
+transform = Transform( 6, 0, 0, 0, 0.5, 0, 0, 0, 6, 0, 0.515713, 0 )
+input_ray_pickable = false
+angular_damp = 1.0
+
+[node name="CollisionShape" type="CollisionShape" parent="agro_zone"]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0 )
+shape = SubResource( 4 )
+
+[node name="PositionWeapon" type="Position3D" parent="."]
+transform = Transform( 0.0589055, 0, -0.998264, 0.0352044, -0.999378, 0.00207734, -0.997642, -0.0352657, -0.0588689, 0.553208, 0.935706, -0.270437 )
+
+[node name="FirePos" type="Position3D" parent="PositionWeapon"]
+transform = Transform( 0.997643, 0.0352045, 0.0589057, 0.0352657, -0.999378, 8.64571e-09, 0.058869, 0.00207734, -0.998263, 2.01888, 0.0719066, 0.379582 )
+
+[node name="Healthbar" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.75844, 0 )
+
+[node name="fireTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="timers" parent="." instance=ExtResource( 5 )]
+
+[node name="RayCast" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
+enabled = true
+cast_to = Vector3( 0, 0, -20 )
+[connection signal="body_entered" from="agro_zone" to="." method="_on_agro_zone_body_entered"]
+[connection signal="body_exited" from="agro_zone" to="." method="_on_agro_zone_body_exited"]
+[connection signal="timeout" from="fireTimer" to="." method="_on_fireTimer_timeout"]
+[connection signal="timeout" from="timers/timeFlaming" to="." method="_on_timeFlaming_timeout"]
+[connection signal="timeout" from="timers/max_flame_secondTimer" to="." method="_on_max_flame_secondTimer_timeout"]
+[connection signal="timeout" from="timers/StunTimer" to="." method="_on_StunTimer_timeout"]
+[connection signal="timeout" from="timers/can_StunTimer" to="." method="_on_can_StunTimer_timeout"]
+[connection signal="timeout" from="timers/SlowTimer" to="." method="_on_SlowTimer_timeout"]
+[connection signal="timeout" from="timers/rootTimer" to="." method="_on_rootTimer_timeout"]
+
+[editable path="timers"]

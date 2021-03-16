@@ -1,0 +1,694 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scenes/Minion/GG/GUI/joystick.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Minion/Health.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/barHorizontal_green.png" type="Texture" id=3]
+[ext_resource path="res://scripts/Minion/GG/GUi/HUD.gd" type="Script" id=4]
+[ext_resource path="res://scripts/Items/GridContainer.gd" type="Script" id=5]
+[ext_resource path="res://assets/qvadratik.jpg" type="Texture" id=6]
+[ext_resource path="res://assets/circle.jpg" type="Texture" id=7]
+[ext_resource path="res://assets/circle.png" type="Texture" id=8]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource( 4 )
+
+[node name="GUI" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="NinePatchRect" parent="GUI"]
+margin_right = 216.0
+margin_bottom = 89.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/MarginContainer"]
+anchor_bottom = 1.0
+margin_right = 200.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/MarginContainer/VBoxContainer"]
+margin_right = 200.0
+margin_bottom = 80.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_right = 200.0
+margin_bottom = 80.0
+
+[node name="Health" parent="GUI/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 200.0
+margin_bottom = 26.0
+step = 0.0
+value = 100.0
+texture_progress = ExtResource( 3 )
+
+[node name="staminabar" parent="GUI/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 30.0
+margin_right = 200.0
+margin_bottom = 56.0
+value = 100.0
+texture_progress = ExtResource( 3 )
+
+[node name="HBoxContainer" type="MarginContainer" parent="GUI/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 60.0
+margin_right = 50.0
+margin_bottom = 80.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+
+[node name="Panel" type="Panel" parent="GUI/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_right = 50.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 50, 20 )
+
+[node name="GridContainer" type="GridContainer" parent="GUI/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel"]
+margin_right = 200.0
+margin_bottom = 30.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+need_type = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI"]
+margin_left = 906.787
+margin_top = 10.6787
+margin_right = 1010.79
+margin_bottom = 83.6787
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Invemtory_button" type="Button" parent="GUI/HBoxContainer"]
+pause_mode = 2
+margin_right = 32.0
+margin_bottom = 26.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+icon = ExtResource( 6 )
+align = 0
+
+[node name="Map" type="Button" parent="GUI/HBoxContainer"]
+pause_mode = 2
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 26.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+icon = ExtResource( 6 )
+align = 0
+
+[node name="Settings_or_pause" type="Button" parent="GUI/HBoxContainer"]
+pause_mode = 2
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 26.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+icon = ExtResource( 6 )
+align = 0
+
+[node name="joystick" parent="GUI" instance=ExtResource( 1 )]
+position = Vector2( 55.1808, 336.476 )
+rotation = -1.57561
+
+[node name="attack" type="TouchScreenButton" parent="GUI"]
+position = Vector2( 896.753, 312.093 )
+scale = Vector2( 0.15, 0.1 )
+normal = ExtResource( 8 )
+pressed = ExtResource( 7 )
+
+[node name="first_active_abillity" type="TouchScreenButton" parent="GUI"]
+position = Vector2( 883.382, 275.067 )
+scale = Vector2( 0.05, 0.05 )
+normal = ExtResource( 8 )
+pressed = ExtResource( 7 )
+
+[node name="twice_active_abillity" type="TouchScreenButton" parent="GUI"]
+position = Vector2( 842.33, 335.067 )
+scale = Vector2( 0.05, 0.05 )
+normal = ExtResource( 8 )
+pressed = ExtResource( 7 )
+
+[node name="flask" type="TouchScreenButton" parent="GUI"]
+position = Vector2( 961.277, 264.541 )
+scale = Vector2( 0.05, 0.05 )
+normal = ExtResource( 8 )
+pressed = ExtResource( 7 )
+
+[node name="Inventory" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="Inventory"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0235294, 0.0235294, 0.0235294, 0.862745 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="NinePatchRect" parent="Inventory"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 15
+size_flags_vertical = 15
+region_rect = Rect2( 0, 0, 718, 80 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Inventory/MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 15
+size_flags_vertical = 15
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Inventory/MarginContainer/HBoxContainer"]
+margin_right = 125.0
+margin_bottom = 600.0
+size_flags_horizontal = 15
+size_flags_vertical = 15
+
+[node name="drop form mobs for craft" type="VBoxContainer" parent="Inventory/MarginContainer/HBoxContainer"]
+margin_left = 129.0
+margin_right = 279.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 150, 0 )
+size_flags_horizontal = 15
+size_flags_vertical = 13
+
+[node name="Label" type="Label" parent="Inventory/MarginContainer/HBoxContainer/drop form mobs for craft"]
+margin_right = 150.0
+margin_bottom = 31.0
+size_flags_horizontal = 15
+size_flags_vertical = 13
+text = "drops
+"
+align = 1
+
+[node name="Panel" type="Panel" parent="Inventory/MarginContainer/HBoxContainer/drop form mobs for craft"]
+margin_top = 35.0
+margin_right = 150.0
+margin_bottom = 415.0
+rect_min_size = Vector2( 150, 380 )
+size_flags_horizontal = 15
+size_flags_vertical = 13
+
+[node name="HBoxContainer" type="MarginContainer" parent="Inventory/MarginContainer/HBoxContainer/drop form mobs for craft/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 15
+size_flags_vertical = 13
+
+[node name="GridContainer" type="GridContainer" parent="Inventory/MarginContainer/HBoxContainer/drop form mobs for craft/Panel/HBoxContainer"]
+show_behind_parent = true
+margin_right = 150.0
+margin_bottom = 380.0
+size_flags_horizontal = 15
+size_flags_vertical = 13
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+need_type = 2
+
+[node name="buff weapon" type="VBoxContainer" parent="Inventory/MarginContainer/HBoxContainer"]
+margin_left = 283.0
+margin_right = 408.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 80, 320 )
+size_flags_horizontal = 15
+size_flags_vertical = 13
+
+[node name="Label" type="Label" parent="Inventory/MarginContainer/HBoxContainer/buff weapon"]
+margin_right = 125.0
+margin_bottom = 31.0
+rect_min_size = Vector2( 80, 31 )
+size_flags_horizontal = 15
+size_flags_vertical = 13
+text = "buff weapon
+"
+align = 1
+
+[node name="Panel2" type="Panel" parent="Inventory/MarginContainer/HBoxContainer/buff weapon"]
+margin_top = 35.0
+margin_right = 125.0
+margin_bottom = 415.0
+rect_min_size = Vector2( 80, 380 )
+size_flags_horizontal = 15
+size_flags_vertical = 13
+
+[node name="MarginContainer" type="MarginContainer" parent="Inventory/MarginContainer/HBoxContainer/buff weapon/Panel2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 15
+size_flags_vertical = 13
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="Inventory/MarginContainer/HBoxContainer/buff weapon/Panel2/MarginContainer"]
+margin_right = 125.0
+margin_bottom = 380.0
+size_flags_horizontal = 15
+size_flags_vertical = 13
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+need_type = 7
+
+[node name="equipment" type="VBoxContainer" parent="Inventory/MarginContainer/HBoxContainer"]
+margin_left = 412.0
+margin_right = 612.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 200, 0 )
+size_flags_horizontal = 15
+size_flags_vertical = 13
+
+[node name="Label" type="Label" parent="Inventory/MarginContainer/HBoxContainer/equipment"]
+margin_right = 200.0
+margin_bottom = 31.0
+size_flags_horizontal = 15
+size_flags_vertical = 13
+text = "equipment
+"
+align = 1
+
+[node name="Panel3" type="Panel" parent="Inventory/MarginContainer/HBoxContainer/equipment"]
+margin_top = 35.0
+margin_right = 200.0
+margin_bottom = 415.0
+rect_min_size = Vector2( 0, 380 )
+size_flags_horizontal = 15
+size_flags_vertical = 13
+
+[node name="Weapon" type="Panel" parent="Inventory/MarginContainer/HBoxContainer/equipment/Panel3"]
+self_modulate = Color( 0.027451, 0.0235294, 0.0235294, 1 )
+margin_left = 15.0
+margin_top = 180.0
+margin_right = 55.0
+margin_bottom = 290.0
+size_flags_horizontal = 15
+size_flags_vertical = 13
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="MarginContainer" parent="Inventory/MarginContainer/HBoxContainer/equipment/Panel3/Weapon"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 15
+size_flags_vertical = 13
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="Inventory/MarginContainer/HBoxContainer/equipment/Panel3/Weapon/HBoxContainer"]
+margin_right = 40.0
+margin_bottom = 110.0
+size_flags_horizontal = 15
+size_flags_vertical = 13
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+need_type = 6
+type_equip = 4
+
+[node name="boots" type="Panel" parent="Inventory/MarginContainer/HBoxContainer/equipment/Panel3"]
+self_modulate = Color( 0.027451, 0.0235294, 0.0235294, 1 )
+margin_left = 60.0
+margin_top = 280.0
+margin_right = 140.0
+margin_bottom = 360.0
+size_flags_horizontal = 15
+size_flags_vertical = 13
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="MarginContainer" parent="Inventory/MarginContainer/HBoxContainer/equipment/Panel3/boots"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 15
+size_flags_vertical = 13
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="Inventory/MarginContainer/HBoxContainer/equipment/Panel3/boots/HBoxContainer"]
+margin_right = 80.0
+margin_bottom = 80.0
+size_flags_horizontal = 15
+size_flags_vertical = 13
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+need_type = 6
+type_equip = 3
+
+[node name="legs" type="Panel" parent="Inventory/MarginContainer/HBoxContainer/equipment/Panel3"]
+self_modulate = Color( 0.027451, 0.0235294, 0.0235294, 1 )
+margin_left = 60.0
+margin_top = 180.0
+margin_right = 140.0
+margin_bottom = 260.0
+size_flags_horizontal = 15
+size_flags_vertical = 13
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="MarginContainer" parent="Inventory/MarginContainer/HBoxContainer/equipment/Panel3/legs"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 15
+size_flags_vertical = 13
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="Inventory/MarginContainer/HBoxContainer/equipment/Panel3/legs/HBoxContainer"]
+margin_right = 80.0
+margin_bottom = 80.0
+size_flags_horizontal = 15
+size_flags_vertical = 13
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+need_type = 6
+type_equip = 2
+
+[node name="armor" type="Panel" parent="Inventory/MarginContainer/HBoxContainer/equipment/Panel3"]
+self_modulate = Color( 0.027451, 0.0235294, 0.0235294, 1 )
+margin_left = 50.0
+margin_top = 80.0
+margin_right = 150.0
+margin_bottom = 170.0
+size_flags_horizontal = 15
+size_flags_vertical = 13
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="MarginContainer" parent="Inventory/MarginContainer/HBoxContainer/equipment/Panel3/armor"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 15
+size_flags_vertical = 13
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="Inventory/MarginContainer/HBoxContainer/equipment/Panel3/armor/HBoxContainer"]
+margin_right = 100.0
+margin_bottom = 90.0
+size_flags_horizontal = 15
+size_flags_vertical = 13
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+need_type = 6
+type_equip = 1
+
+[node name="helm" type="Panel" parent="Inventory/MarginContainer/HBoxContainer/equipment/Panel3"]
+self_modulate = Color( 0.027451, 0.027451, 0.027451, 1 )
+margin_left = 80.0
+margin_top = 25.0
+margin_right = 120.0
+margin_bottom = 65.0
+size_flags_horizontal = 15
+size_flags_vertical = 13
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="MarginContainer" parent="Inventory/MarginContainer/HBoxContainer/equipment/Panel3/helm"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 15
+size_flags_vertical = 13
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="Inventory/MarginContainer/HBoxContainer/equipment/Panel3/helm/HBoxContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
+size_flags_horizontal = 15
+size_flags_vertical = 13
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+need_type = 6
+type_equip = 0
+
+[node name="Scarf" type="VBoxContainer" parent="Inventory/MarginContainer/HBoxContainer"]
+margin_left = 616.0
+margin_right = 741.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 80, 0 )
+size_flags_horizontal = 15
+size_flags_vertical = 13
+
+[node name="Label" type="Label" parent="Inventory/MarginContainer/HBoxContainer/Scarf"]
+margin_right = 125.0
+margin_bottom = 31.0
+size_flags_horizontal = 15
+size_flags_vertical = 13
+text = "Scarf
+"
+align = 1
+
+[node name="Panel4" type="Panel" parent="Inventory/MarginContainer/HBoxContainer/Scarf"]
+margin_top = 35.0
+margin_right = 125.0
+margin_bottom = 415.0
+rect_min_size = Vector2( 0, 380 )
+size_flags_horizontal = 15
+size_flags_vertical = 13
+
+[node name="MarginContainer" type="MarginContainer" parent="Inventory/MarginContainer/HBoxContainer/Scarf/Panel4"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 15
+size_flags_vertical = 13
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="Inventory/MarginContainer/HBoxContainer/Scarf/Panel4/MarginContainer"]
+margin_right = 125.0
+margin_bottom = 380.0
+size_flags_horizontal = 15
+size_flags_vertical = 13
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+need_type = 3
+
+[node name="Flasks" type="VBoxContainer" parent="Inventory/MarginContainer/HBoxContainer"]
+margin_left = 745.0
+margin_right = 895.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 150, 0 )
+size_flags_horizontal = 15
+size_flags_vertical = 13
+
+[node name="Label" type="Label" parent="Inventory/MarginContainer/HBoxContainer/Flasks"]
+margin_right = 150.0
+margin_bottom = 31.0
+size_flags_horizontal = 15
+size_flags_vertical = 13
+text = "Flasks
+"
+align = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Inventory/MarginContainer/HBoxContainer/Flasks"]
+margin_top = 35.0
+margin_right = 150.0
+margin_bottom = 315.0
+rect_min_size = Vector2( 150, 280 )
+size_flags_horizontal = 15
+size_flags_vertical = 13
+
+[node name="Panel5" type="Panel" parent="Inventory/MarginContainer/HBoxContainer/Flasks/HBoxContainer2"]
+margin_right = 150.0
+margin_bottom = 280.0
+size_flags_horizontal = 15
+size_flags_vertical = 13
+
+[node name="MarginContainer" type="MarginContainer" parent="Inventory/MarginContainer/HBoxContainer/Flasks/HBoxContainer2/Panel5"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 15
+size_flags_vertical = 13
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="Inventory/MarginContainer/HBoxContainer/Flasks/HBoxContainer2/Panel5/MarginContainer"]
+margin_right = 150.0
+margin_bottom = 280.0
+size_flags_horizontal = 15
+size_flags_vertical = 13
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Inventory/MarginContainer/HBoxContainer/Flasks"]
+margin_top = 319.0
+margin_right = 150.0
+margin_bottom = 409.0
+rect_min_size = Vector2( 150, 90 )
+size_flags_horizontal = 15
+size_flags_vertical = 13
+alignment = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Inventory/MarginContainer/HBoxContainer/Flasks/HBoxContainer"]
+margin_right = 73.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 40, 58 )
+size_flags_horizontal = 15
+size_flags_vertical = 13
+
+[node name="Panel6" type="Panel" parent="Inventory/MarginContainer/HBoxContainer/Flasks/HBoxContainer/VBoxContainer"]
+margin_right = 73.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+size_flags_horizontal = 15
+size_flags_vertical = 13
+
+[node name="MarginContainer" type="MarginContainer" parent="Inventory/MarginContainer/HBoxContainer/Flasks/HBoxContainer/VBoxContainer/Panel6"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 15
+size_flags_vertical = 13
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="Inventory/MarginContainer/HBoxContainer/Flasks/HBoxContainer/VBoxContainer/Panel6/MarginContainer"]
+margin_right = 73.0
+margin_bottom = 40.0
+size_flags_horizontal = 15
+size_flags_vertical = 13
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+need_type = 5
+
+[node name="Panel7" type="Panel" parent="Inventory/MarginContainer/HBoxContainer/Flasks/HBoxContainer/VBoxContainer"]
+margin_top = 44.0
+margin_right = 73.0
+margin_bottom = 84.0
+rect_min_size = Vector2( 40, 40 )
+size_flags_horizontal = 15
+size_flags_vertical = 13
+
+[node name="MarginContainer" type="MarginContainer" parent="Inventory/MarginContainer/HBoxContainer/Flasks/HBoxContainer/VBoxContainer/Panel7"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 15
+size_flags_vertical = 13
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="Inventory/MarginContainer/HBoxContainer/Flasks/HBoxContainer/VBoxContainer/Panel7/MarginContainer"]
+margin_right = 73.0
+margin_bottom = 40.0
+size_flags_horizontal = 15
+size_flags_vertical = 13
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+need_type = 5
+
+[node name="Panel6" type="Panel" parent="Inventory/MarginContainer/HBoxContainer/Flasks/HBoxContainer"]
+margin_left = 77.0
+margin_right = 150.0
+margin_bottom = 90.0
+rect_min_size = Vector2( 60, 60 )
+size_flags_horizontal = 15
+size_flags_vertical = 13
+
+[node name="MarginContainer" type="MarginContainer" parent="Inventory/MarginContainer/HBoxContainer/Flasks/HBoxContainer/Panel6"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 15
+size_flags_vertical = 13
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="Inventory/MarginContainer/HBoxContainer/Flasks/HBoxContainer/Panel6/MarginContainer"]
+margin_right = 73.0
+margin_bottom = 90.0
+size_flags_horizontal = 15
+size_flags_vertical = 13
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="VBoxContainer" parent="Inventory/MarginContainer/HBoxContainer"]
+margin_left = 899.0
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_horizontal = 15
+size_flags_vertical = 13
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Exit_from_invetory" type="Button" parent="Inventory/MarginContainer/HBoxContainer/HBoxContainer"]
+pause_mode = 2
+margin_right = 125.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 50, 40 )
+size_flags_horizontal = 15
+size_flags_vertical = 13
+text = "exit"
+
+[node name="map" type="Control" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="GUI/HBoxContainer/Invemtory_button" to="." method="_on_Invemtory_button_pressed"]
+[connection signal="pressed" from="GUI/HBoxContainer/Map" to="." method="_on_Map_pressed"]
+[connection signal="pressed" from="GUI/HBoxContainer/Settings_or_pause" to="." method="_on_Settings_or_pause_pressed"]
+[connection signal="pressed" from="Inventory/MarginContainer/HBoxContainer/HBoxContainer/Exit_from_invetory" to="." method="_on_Exit_from_invetory_pressed"]

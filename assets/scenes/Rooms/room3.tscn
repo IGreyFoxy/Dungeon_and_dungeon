@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/Minion/GG/GGCapsuleCL_Extract3.BMP" type="Texture" id=1]
+[ext_resource path="res://scenes/Minion/Enemy/skeltonTraper.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scripts/room.gd" type="Script" id=3]
+[ext_resource path="res://scenes/Minion/Enemy/Bat.tscn" type="PackedScene" id=4]
+
+[sub_resource type="CubeMesh" id=1]
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0.905882, 0.145098, 0.0901961, 1 )
+albedo_texture = ExtResource( 1 )
+
+[sub_resource type="BoxShape" id=3]
+
+[node name="room1" type="Spatial" groups=[
+"rooms",
+]]
+script = ExtResource( 3 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 20, 0, 0, 0, 1, 0, 0, 0, 20, 0, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="StaticBody" type="StaticBody" parent="MeshInstance"]
+
+[node name="CollisionShape" type="CollisionShape" parent="MeshInstance/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="BAT" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.16644, 9.76289 )
+
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.40573, 0 )
+light_color = Color( 0.964706, 0.52549, 0.423529, 1 )
+omni_range = 46.8
+
+[node name="Skeleton_Traper" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.86537, -17.64 )

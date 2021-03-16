@@ -1,0 +1,134 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://scripts/Minion/enemy/skeltonTraper.gd" type="Script" id=1]
+[ext_resource path="res://scenes/Minion/Healthbar.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Minion/Enemy/Equipment/flyTrap.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Minion/timers.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/Minion/Enemy/Equipment/enemy_weapon.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/Minion/Enemy/Skeleslhep2kSemifullPolySphere.OBJ" type="ArrayMesh" id=6]
+[ext_resource path="res://assets/Minion/GG/GGCapsuleCL_Extract3.BMP" type="Texture" id=7]
+
+[sub_resource type="BoxShape" id=1]
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0.0273438, 0.0273438, 0.0273438, 1 )
+albedo_texture = ExtResource( 7 )
+
+[sub_resource type="BoxShape" id=3]
+
+[sub_resource type="BoxShape" id=4]
+
+[node name="Skeleton_Traper" type="KinematicBody" groups=[
+"Enemy",
+"range",
+"skeleton",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+script = ExtResource( 1 )
+weapon = ExtResource( 5 )
+firebool = ExtResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 1, 0 )
+shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( -0.2, 0, -7.78829e-08, 0, 0.2, 0, 7.78829e-08, 0, -0.2, 0, 3, 0 )
+mesh = ExtResource( 6 )
+material/0 = SubResource( 2 )
+
+[node name="hitbox" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+input_ray_pickable = false
+angular_damp = 1.0
+
+[node name="CollisionShape" type="CollisionShape" parent="hitbox"]
+shape = SubResource( 3 )
+
+[node name="agro_zone" type="Area" parent="."]
+transform = Transform( 6, 0, 0, 0, 0.5, 0, 0, 0, 6, 0, 0.515713, 0 )
+input_ray_pickable = false
+angular_damp = 1.0
+
+[node name="CollisionShape" type="CollisionShape" parent="agro_zone"]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0 )
+shape = SubResource( 4 )
+
+[node name="attack_zone" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0.515713, 0 )
+input_ray_pickable = false
+angular_damp = 1.0
+
+[node name="CollisionShape" type="CollisionShape" parent="attack_zone"]
+transform = Transform( 2.5, 0, 0, 0, 1, 0, 0, 0, 2.5, 0, 0, 0 )
+shape = SubResource( 4 )
+
+[node name="middleswapflytrap_zone" type="Area" parent="."]
+transform = Transform( 2.5, 0, 0, 0, 0.5, 0, 0, 0, 2.5, 0, 0.515713, 0 )
+input_ray_pickable = false
+angular_damp = 1.0
+
+[node name="CollisionShape" type="CollisionShape" parent="middleswapflytrap_zone"]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0 )
+shape = SubResource( 4 )
+
+[node name="shortswapflytrap_zone" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0.515713, 0 )
+input_ray_pickable = false
+angular_damp = 1.0
+
+[node name="CollisionShape" type="CollisionShape" parent="shortswapflytrap_zone"]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0 )
+shape = SubResource( 4 )
+
+[node name="longswapflytrap_zone" type="Area" parent="."]
+transform = Transform( 6, 0, 0, 0, 0.5, 0, 0, 0, 6, 0, 0.515713, 0 )
+input_ray_pickable = false
+angular_damp = 1.0
+
+[node name="CollisionShape" type="CollisionShape" parent="longswapflytrap_zone"]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0 )
+shape = SubResource( 4 )
+
+[node name="PositionWeapon" type="Position3D" parent="."]
+transform = Transform( 0.0589055, 0, -0.998264, 0.0352044, -0.999378, 0.00207734, -0.997642, -0.0352657, -0.0588689, 0.412006, 0.982005, -0.0875294 )
+
+[node name="FirePos" type="Position3D" parent="PositionWeapon"]
+transform = Transform( 0.91905, -0.389716, 0.0589057, -0.390394, -0.920648, 8.53948e-09, 0.0542314, -0.0229964, -0.998263, 2.01888, 0.0719066, 0.379582 )
+
+[node name="Healthbar" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.47661, 0 )
+
+[node name="fireTimer" type="Timer" parent="."]
+wait_time = 20.0
+
+[node name="runTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="timers" parent="." instance=ExtResource( 4 )]
+
+[node name="Position3D" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.72848, 0, -2.46671 )
+
+[node name="RayCast" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
+enabled = true
+cast_to = Vector3( 0, 0, -20 )
+[connection signal="body_entered" from="agro_zone" to="." method="_on_agro_zone_body_entered"]
+[connection signal="body_exited" from="agro_zone" to="." method="_on_agro_zone_body_exited"]
+[connection signal="body_entered" from="attack_zone" to="." method="_on_attack_zone_body_entered"]
+[connection signal="body_exited" from="attack_zone" to="." method="_on_attack_zone_body_exited"]
+[connection signal="body_entered" from="middleswapflytrap_zone" to="." method="_on_middleswapflytrap_zone_body_entered"]
+[connection signal="body_entered" from="shortswapflytrap_zone" to="." method="_on_shortswapflytrap_zone_body_entered"]
+[connection signal="body_entered" from="longswapflytrap_zone" to="." method="_on_longswapflytrap_zone_body_entered"]
+[connection signal="timeout" from="fireTimer" to="." method="_on_fireTimer_timeout"]
+[connection signal="timeout" from="runTimer" to="." method="_on_runTimer_timeout"]
+[connection signal="timeout" from="timers/timeFlaming" to="." method="_on_timeFlaming_timeout"]
+[connection signal="timeout" from="timers/max_flame_secondTimer" to="." method="_on_max_flame_secondTimer_timeout"]
+[connection signal="timeout" from="timers/StunTimer" to="." method="_on_StunTimer_timeout"]
+[connection signal="timeout" from="timers/can_StunTimer" to="." method="_on_can_StunTimer_timeout"]
+[connection signal="timeout" from="timers/SlowTimer" to="." method="_on_SlowTimer_timeout"]
+[connection signal="timeout" from="timers/rootTimer" to="." method="_on_rootTimer_timeout"]
+
+[editable path="timers"]

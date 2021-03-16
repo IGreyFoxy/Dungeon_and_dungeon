@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scenes/Minion/Healthbar.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/Minion/enemy/ToxicWebCocoon.gd" type="Script" id=2]
+
+[sub_resource type="CapsuleMesh" id=1]
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0.196078, 0.913725, 0.0941176, 1 )
+
+[sub_resource type="CapsuleShape" id=3]
+
+[sub_resource type="BoxShape" id=4]
+
+[node name="webCocoon" type="KinematicBody"]
+transform = Transform( 1, 0, 0, 0, 1.2, 0, 0, 0, 1, 0, 0, 0 )
+script = ExtResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="hitbox" type="Area" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="hitbox"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
+shape = SubResource( 3 )
+
+[node name="LifeTimer" type="Timer" parent="."]
+wait_time = 6.0
+one_shot = true
+
+[node name="agro_zone" type="Area" parent="."]
+transform = Transform( 0.7, 0, 0, 0, 1, 0, 0, 0, 0.7, 0, 0, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="agro_zone"]
+transform = Transform( 5, 0, 0, 0, 1, 0, 0, 0, 5, 0, 0, 0 )
+shape = SubResource( 4 )
+
+[node name="Healthbar" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8782, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
+shape = SubResource( 3 )
+
+[node name="Position3D" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.31329, 1.07989, -2.36095 )
+
+[node name="Position3D2" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.70643, 1.07989, 2.24361 )
+
+[node name="Position3D3" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.28327, 1.07989, 1.96791 )
+
+[node name="Position3D4" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7435, 1.07989, -1.77633 )
+
+[node name="Position3D5" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.361846, 1.07989, -0.158681 )
+[connection signal="health_changed" from="." to="Healthbar" method="update"]
+[connection signal="timeout" from="LifeTimer" to="." method="_on_LifeTimer_timeout"]
+[connection signal="body_entered" from="agro_zone" to="." method="_on_agro_zone_body_entered"]
+[connection signal="body_exited" from="agro_zone" to="." method="_on_agro_zone_body_exited"]

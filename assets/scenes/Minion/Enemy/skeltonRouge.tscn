@@ -1,0 +1,90 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scenes/Minion/Healthbar.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/Minion/enemy/skeltonRouge.gd" type="Script" id=2]
+[ext_resource path="res://scenes/Minion/Enemy/Equipment/rouge_knife.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Minion/timers.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/Minion/Enemy/Skeleslhep2kSemifullPolySphere.OBJ" type="ArrayMesh" id=5]
+
+[sub_resource type="BoxShape" id=1]
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0.0941176, 0.819608, 0.803922, 1 )
+
+[sub_resource type="BoxShape" id=3]
+
+[sub_resource type="BoxShape" id=4]
+
+[node name="Enemy" type="KinematicBody" groups=[
+"Enemy",
+"skeleton",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+script = ExtResource( 2 )
+weapon = ExtResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 1, 0 )
+shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( -0.2, 0, -7.78829e-08, 0, 0.2, 0, 7.78829e-08, 0, -0.2, 0, 3, 0 )
+mesh = ExtResource( 5 )
+material/0 = SubResource( 2 )
+
+[node name="hitbox" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+input_ray_pickable = false
+angular_damp = 1.0
+
+[node name="CollisionShape" type="CollisionShape" parent="hitbox"]
+shape = SubResource( 3 )
+
+[node name="agro_zone" type="Area" parent="."]
+transform = Transform( 2, 0, 0, 0, 0.5, 0, 0, 0, 2, 0, 0.515713, 0 )
+input_ray_pickable = false
+angular_damp = 1.0
+
+[node name="CollisionShape" type="CollisionShape" parent="agro_zone"]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0 )
+shape = SubResource( 4 )
+
+[node name="attack_zone" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0.515713, 0 )
+input_ray_pickable = false
+angular_damp = 1.0
+
+[node name="CollisionShape" type="CollisionShape" parent="attack_zone"]
+transform = Transform( 2.5, 0, 0, 0, 1, 0, 0, 0, 2.5, 0, 0, 0 )
+shape = SubResource( 4 )
+
+[node name="PositionWeapon" type="Position3D" parent="."]
+transform = Transform( 0.0589055, 0, -0.998264, 0.0352044, -0.999378, 0.00207734, -0.997642, -0.0352657, -0.0588689, 0.401155, 0.845186, -0.14873 )
+
+[node name="Healthbar" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.60191, 0 )
+
+[node name="Timer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 2.0
+one_shot = true
+
+[node name="timers" parent="." instance=ExtResource( 4 )]
+
+[node name="RayCast" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
+enabled = true
+cast_to = Vector3( 0, 0, -10 )
+[connection signal="body_entered" from="agro_zone" to="." method="_on_agro_zone_body_entered"]
+[connection signal="body_exited" from="agro_zone" to="." method="_on_agro_zone_body_exited"]
+[connection signal="body_entered" from="attack_zone" to="." method="_on_attack_zone_body_entered"]
+[connection signal="body_exited" from="attack_zone" to="." method="_on_attack_zone_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="timers/timeFlaming" to="." method="_on_timeFlaming_timeout"]
+[connection signal="timeout" from="timers/max_flame_secondTimer" to="." method="_on_max_flame_secondTimer_timeout"]
+[connection signal="timeout" from="timers/StunTimer" to="." method="_on_StunTimer_timeout"]
+[connection signal="timeout" from="timers/can_StunTimer" to="." method="_on_can_StunTimer_timeout"]
+[connection signal="timeout" from="timers/SlowTimer" to="." method="_on_SlowTimer_timeout"]
+[connection signal="timeout" from="timers/rootTimer" to="." method="_on_rootTimer_timeout"]
+
+[editable path="timers"]

@@ -1,0 +1,25 @@
+[gd_scene format=2]
+
+[node name="timers" type="Node"]
+
+[node name="timeFlaming" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="max_flame_secondTimer" type="Timer" parent="."]
+wait_time = 10.0
+
+[node name="StunTimer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
+[node name="can_StunTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="SlowTimer" type="Timer" parent="."]
+wait_time = 6.0
+one_shot = true
+
+[node name="rootTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true

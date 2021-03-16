@@ -1,0 +1,136 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://scripts/Minion/GG/GG.gd" type="Script" id=1]
+[ext_resource path="res://assets/Minion/GG/Skeleton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/Minion/GG/.anim" type="Animation" id=3]
+[ext_resource path="res://scripts/Minion/GG/backhitbox.gd" type="Script" id=4]
+[ext_resource path="res://scenes/Minion/timers.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/Minion/GG/Group18813_002.material" type="Material" id=6]
+[ext_resource path="res://scenes/Minion/GG/GUI/HUD.tscn" type="PackedScene" id=7]
+
+[sub_resource type="BoxShape" id=1]
+
+[sub_resource type="BoxShape" id=2]
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 1, 1.08317, 1 )
+
+[node name="GG" type="KinematicBody" groups=[
+"Player",
+]]
+transform = Transform( -0.00675975, 0, -0.0997713, 0, 0.1, 0, 0.0997713, 0, -0.00675975, 0, 0, 0 )
+script = ExtResource( 1 )
+max_speed = 1
+
+[node name="hitbox" type="Area" parent="."]
+transform = Transform( 3, 0, 6.45717e-08, 0, 2, 0, -1.93715e-07, 0, 1, -0.456855, 0.8, 3.72529e-08 )
+input_ray_pickable = false
+angular_damp = 1.0
+
+[node name="CollisionShape" type="CollisionShape" parent="hitbox"]
+transform = Transform( 0.1, 0, 2.32831e-08, 0, 1, 0, -3.72529e-09, 0, 0.5, 0.159122, 0.00539991, 0.00112763 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 0.4, 0, 2.23517e-08, 0, 5, 0, -1.11759e-08, 0, 0.8, 1.00798, -1.68481, 0.976496 )
+shape = SubResource( 2 )
+
+[node name="PositionWeapon" type="Position3D" parent="."]
+transform = Transform( 1, 0, 1.19209e-07, 0, 1, 0, -1.19209e-07, 0, 1, 0.228992, 0.760542, 0.506026 )
+
+[node name="FirePos" type="Position3D" parent="PositionWeapon"]
+transform = Transform( 1, 0, 3.72529e-08, 0, 1, 0, -3.72529e-08, 0, 1, 3.0324, 0.228316, -0.261725 )
+
+[node name="fireTimer" type="Timer" parent="."]
+wait_time = 1.5
+
+[node name="backhitbox" type="Area" parent="." groups=[
+"back",
+]]
+transform = Transform( 1, 0, 1.71363e-07, 0, 1, 0, -1.71363e-07, 0, 1, -0.722, 1, 0 )
+script = ExtResource( 4 )
+
+[node name="back" type="CollisionShape" parent="backhitbox"]
+transform = Transform( 0.0999999, 0, 1.00583e-07, 0, 2, 0, -1.58325e-08, 0, 0.5, 0.358011, 0.0655663, 0.0678837 )
+shape = SubResource( 3 )
+
+[node name="timers" parent="." instance=ExtResource( 5 )]
+
+[node name="timeFlaming" parent="timers" index="0"]
+process_mode = 0
+
+[node name="max_flame_secondTimer" parent="timers" index="1"]
+process_mode = 0
+
+[node name="StunTimer" parent="timers" index="2"]
+wait_time = 8.0
+
+[node name="can_StunTimer" parent="timers" index="3"]
+wait_time = 20.0
+
+[node name="HUD" parent="." instance=ExtResource( 7 )]
+
+[node name="GUI" parent="HUD" index="0"]
+anchor_right = 1.003
+margin_right = -0.0720215
+margin_bottom = 1.0
+
+[node name="MarginContainer" parent="HUD/GUI" index="0"]
+margin_left = 2.37842
+margin_top = 2.37842
+margin_right = 218.378
+margin_bottom = 91.3784
+
+[node name="HBoxContainer" parent="HUD/GUI" index="1"]
+margin_left = 897.862
+margin_top = 8.64386
+margin_right = 1001.86
+margin_bottom = 81.6439
+
+[node name="joystick" parent="HUD/GUI" index="2"]
+position = Vector2( 114.22, 526.936 )
+scale = Vector2( 0.137361, 0.197588 )
+
+[node name="attack" parent="HUD/GUI" index="3"]
+position = Vector2( 881.052, 490.896 )
+
+[node name="first_active_abillity" parent="HUD/GUI" index="4"]
+position = Vector2( 867.681, 453.87 )
+
+[node name="twice_active_abillity" parent="HUD/GUI" index="5"]
+position = Vector2( 826.629, 513.87 )
+
+[node name="flask" parent="HUD/GUI" index="6"]
+position = Vector2( 945.576, 443.344 )
+
+[node name="cam" type="Camera" parent="."]
+transform = Transform( -0.173648, 0.336824, -0.925416, 0, 0.939693, 0.34202, 0.984807, 0.0593911, -0.163176, -8, 3, 1 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/ = ExtResource( 3 )
+
+[node name="Skeleton" parent="." instance=ExtResource( 2 )]
+transform = Transform( -1.93715e-07, 0, 1, 0, 1, 0, -1, 0, -1.93715e-07, 0, 0, 0 )
+
+[node name="GG7kTESTNOMER9999999999999001" parent="Skeleton" index="0"]
+material/0 = ExtResource( 6 )
+[connection signal="stamina_changed" from="." to="HUD" method="update_staminabar"]
+[connection signal="timeout" from="fireTimer" to="." method="_on_fireTimer_timeout"]
+[connection signal="timeout" from="timers/timeFlaming" to="." method="_on_timeFlaming_timeout"]
+[connection signal="timeout" from="timers/max_flame_secondTimer" to="." method="_on_max_flame_secondTimer_timeout"]
+[connection signal="timeout" from="timers/StunTimer" to="." method="_on_StunTimer_timeout"]
+[connection signal="timeout" from="timers/can_StunTimer" to="." method="_on_can_StunTimer_timeout"]
+[connection signal="timeout" from="timers/SlowTimer" to="." method="_on_SlowTimer_timeout"]
+[connection signal="timeout" from="timers/rootTimer" to="." method="_on_rootTimer_timeout"]
+[connection signal="pressed" from="HUD/GUI/attack" to="." method="_on_attack_pressed"]
+[connection signal="released" from="HUD/GUI/attack" to="." method="_on_attack_released"]
+[connection signal="pressed" from="HUD/GUI/flask" to="." method="_on_flask_pressed"]
+[connection signal="released" from="HUD/GUI/flask" to="." method="_on_flask_released"]
+
+[editable path="timers"]
+
+[editable path="HUD"]
+
+[editable path="Skeleton"]
